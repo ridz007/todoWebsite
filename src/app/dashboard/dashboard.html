@@ -1,0 +1,56 @@
+<div class="jumbotron">
+    {{TaskHeading}}
+</div>
+<div class="container-fluid">
+    <!-- Added the heading here-->
+    <div class="row">
+        <div class="col-xs-4 todoClass">{{ToDoText}}</div>
+        <div class="col-xs-4 inprogressClass">{{InProgress}}</div>
+        <div class="col-xs-4 completedClass">{{Completed}}</div>
+    </div>
+    <br>
+    <!-- Added the data here-->
+    <input type="text" [(ngModel)]="newText" placeholder="Add tasks"><button class="glyphicon glyphicon-plus-sign" (click)='addItem()'></button>
+    <div class="row">
+        <div class="col-xs-4">
+            <div *ngFor="let task of todoTaskArray;let i = index">
+                <!--<input type="text" value="{{tasks}}" (swiperight)="moveToInProgress(tasks, 'todotask')">-->
+                <div class="todoClass" (swiperight)="moveToInProgress(task, 'todotask')">
+                    <input id ="todoText" class="inputField" type="text" value="{{task}}" >
+                    <div>
+                        <button class="glyphicon glyphicon-pencil" (click)="updateText(this, 'todotask', i)"></button>
+                        <button class="glyphicon glyphicon-trash" (click)="removeItem(task, 'todotask', i)"></button>
+                        <button class="glyphicon glyphicon-star-empty" [style.background-color]="getStyle()" (click)="showStyle = !showStyle;"></button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div *ngFor="let task of inProgressTaskArray;let i = index">
+                <div class="inprogressClass" (swiperight)="moveToCompleted(task)" (swipeleft)="moveToDoTask(task)">
+                    <input class="inputField" type="text" value="{{task}}" >
+                <div>
+                    <button class=" glyphicon glyphicon-saved"></button>
+                    <button class=" glyphicon glyphicon-trash" (click)="removeItem(task, 'inprogressTask', i)"></button>
+                    <button class=" glyphicon glyphicon-star-empty"></button>
+                </div>
+                </div>
+                <br>
+            </div>
+        </div>
+
+        <div class="col-xs-4">
+            <div *ngFor="let task of completedTaskArray;let i = index">
+                <div class="completedClass inputField" (swipeleft)="moveToInProgress(task, 'completedTask')">{{task}}</div>
+                <div class="completedClass">
+                    <button class=" glyphicon glyphicon-trash" (click)="removeItem(task, 'completedTask', i)"></button>
+                </div>
+                <br>
+            </div>
+        </div>
+
+
+    </div>
+</div>

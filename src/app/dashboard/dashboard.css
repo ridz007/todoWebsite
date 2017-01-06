@@ -1,0 +1,19 @@
+.todoClass {
+    background-color: lightcoral;
+}
+
+.inprogressClass {
+background-color: seagreen;
+}
+
+.completedClass {
+    background-color: lightgray;
+}
+
+.editButton {
+margin-left: 90%;
+}
+
+.inputField {
+    width: 100%;
+}
